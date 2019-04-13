@@ -48,6 +48,6 @@ app.use('/campgrounds/:id/comments',commentRoutes);
 app.use('/campgrounds',campgroundRoutes);
 app.use(indexRoutes);
 
-app.listen(3000,() => {
+app.listen(process.env.PORT,process.env.IP,() => {
   console.log('Server is up');
 });
