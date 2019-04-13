@@ -18,7 +18,7 @@ var campgroundRoutes =  require('./routes/campgrounds');
 var app= express();
 //mongoose.connect('mongodb://localhost/my_camp',{useNewUrlParser: true});
 
-const uri = "mongodb+srv://sahil:<password>@mycamps-m4rvn.mongodb.net/test?retryWrites=true";
+const uri = "mongodb+srv://sahil:lpoikmnju@mycamps-m4rvn.mongodb.net/test?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
   const collection = client.db("test").collection("devices");
