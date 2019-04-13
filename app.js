@@ -1,6 +1,7 @@
 const express        =  require('express');
 const bodyParser     =  require('body-parser');
 const mongoose       =  require('mongoose');
+const MongoClient    = require('mongodb').MongoClient;
 const passport       =  require('passport');
 const LocalStrategy  =  require('passport-local');
 const methodOverride =  require('method-override');
@@ -16,7 +17,15 @@ var campgroundRoutes =  require('./routes/campgrounds');
 
 var app= express();
 //mongoose.connect('mongodb://localhost/my_camp',{useNewUrlParser: true});
-mongoose.connect('mongodb+srv://sahil:lpoikmnju@mycamps-wj8wv.mongodb.net/test?retryWrites=true',{useNewUrlParser: true});
+
+const uri = "mongodb+srv://sahil:<password>@mycamps-m4rvn.mongodb.net/test?retryWrites=true";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine','ejs');
