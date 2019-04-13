@@ -1,7 +1,6 @@
 const express        =  require('express');
 const bodyParser     =  require('body-parser');
 const mongoose       =  require('mongoose');
-const MongoClient    = require('mongodb').MongoClient;
 const passport       =  require('passport');
 const LocalStrategy  =  require('passport-local');
 const methodOverride =  require('method-override');
@@ -11,21 +10,15 @@ var Campground       =  require('./models/campground');
 var Comment          =  require('./models/comment');
 const User           =  require('./models/user');
 
+var PORT = process.env.PORT || 3000;
+
 var indexRoutes      =  require('./routes/index');
 var commentRoutes    =  require('./routes/comments');
 var campgroundRoutes =  require('./routes/campgrounds');
 
+//var url= process.env.MONGOLAB_URI;
 var app= express();
-//mongoose.connect('mongodb://localhost/my_camp',{useNewUrlParser: true});
-
-const uri = "mongodb+srv://sahil:lpoikmnju@mycamps-m4rvn.mongodb.net/test?retryWrites=true";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
-
+mongoose.connect('mongodb://localhost/my_camp',{useNewUrlParser: true});
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine','ejs');
@@ -57,6 +50,6 @@ app.use('/campgrounds/:id/comments',commentRoutes);
 app.use('/campgrounds',campgroundRoutes);
 app.use(indexRoutes);
 
-app.listen(process.env.PORT,process.env.IP,() => {
+app.listen(PORT,() => {
   console.log('Server is up');
 });
